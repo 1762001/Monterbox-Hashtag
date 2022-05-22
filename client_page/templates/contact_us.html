@@ -1,0 +1,153 @@
+{% extends "header1.html" %} {% load static %} {% block content %}
+
+
+<!-- Breadcrumbs Section Start -->
+<div class="rs-breadcrumbs">
+    <div class="breadcrumbs-wrap">
+        <img src="{% static 'images/breadcrumbs/breadcrumb_contactus.jpg' %}" alt="Breadcrumbs Image">
+        <div class="breadcrumbs-inner">
+            <div class="container">
+                <div class="breadcrumbs-text">
+                    <h1 class="breadcrumbs-title mb-17">Contact Us</h1>
+                    <div class="categories">
+                        <ul>
+                            <li><a href="/client_page/home">Home</a></li>
+                            <li class="active">Contact</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs Section End -->
+
+<!-- Contact Section Start -->
+<div class="rs-contact">
+    <!-- Contact Icon Start -->
+    <div class="rs-contact-icon pt-100 pb-100 md-pb-80 md-pt-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 md-mb-30">
+                    <div class="single-icon text-center">
+                        <div class="icon-part">
+                            <i class="flaticon-phone"></i>
+                        </div>
+                        <div class="icon-text">
+                            <h3 class="icon-title">Call Us</h3>
+                            <a class="icon-info" href="tel:+919773055968">+91 8709007717</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 md-mb-30">
+                    <div class="single-icon text-center">
+                        <div class="icon-part">
+                            <i class="flaticon-email"></i>
+                        </div>
+                        <div class="icon-text">
+                            <h3 class="icon-title">Mail Us</h3>
+                            <a class="icon-info" href="mailto:kumarashwini123abc@gmail.com">kumarashwini123abc@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 xs-mb-30">
+                    <div class="single-icon text-center">
+                        <div class="icon-part">
+                            <i class="flaticon-send"></i>
+                        </div>
+                        <div class="icon-text">
+                            <h3 class="icon-title">Fax</h3>
+                            <span>+3301-341-XXXX</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="single-icon text-center">
+                        <div class="icon-part">
+                            <i class="flaticon-location"></i>
+                        </div>
+                        <div class="icon-text after-none">
+                            <h3 class="icon-title">Address</h3>
+                            <span>Odisha, India, 103</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Icon End -->
+
+    <!-- Contact Form And Map Start -->
+    <div class="contact-part sec-bg pt-100 pb-100 md-pt-80 md-pb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 pl-50 md-pl-15">
+                    <div class="contact-area">
+                        <div class="title-style mb-50">
+                            <h2 class="margin-0 uppercase">Get in Touch</h2>
+                            <span class="line-bg left-line pt-10 y-b"></span>
+                        </div>
+                        <div id="form-messages"></div>
+                        <form id="contact-form" class="contact-form" method="post" action="/client_page/contact_us" data-parsley-validate="null">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="from-control">
+                                        <input name="contact_name" type="text" placeholder="Name" id="name" data-parsley-required="true">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="from-control">
+                                        <input name="contact_email" type="email" placeholder="E-Mail" id="email" required="required" data-parsley-required="true">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="from-control">
+                                        <input name="subject" type="text" placeholder="Subject" id="subject" required="required" data-parsley-required="true" data-parsley-maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="from-control">
+                                <textarea name="message" placeholder="Your Message Here" id="message" required="required" data-parsley-required="true"></textarea>
+                            </div>
+                            <div class="submit-btn">
+                                <button class="readon" type="submit">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Form And Map End -->
+
+    <div class="sec-bg md-pb-80">
+        <div class="container">
+            <!-- Subscribe Section Start -->
+            <div class="rs-subscribe bg7 md-margin-0">
+                <form class="subscribe-form" method="post" action="/client_page/subscribe">
+                    {% csrf_token %}
+                    <div class="row rs-vertical-middle">
+                        <div class="col-lg-6 col-md-12 md-mb-30">
+                            <div class="title-part">
+                                <h2 class="title white-color"> Subscribe For Update</h2>
+                                <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="subscribe-form-fields">
+                                <input type="submit" class="news-submit" value="Subscribe">
+                                <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Subscribe Section End -->
+        </div>
+    </div>
+</div>
+<!-- Contact Section End -->
+
+{% endblock %}

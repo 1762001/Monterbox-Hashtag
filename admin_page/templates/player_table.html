@@ -1,0 +1,63 @@
+{% extends "header.html" %}
+{% load django_template_maths %}
+{% block content %}
+
+<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <strong>Product</strong> Table</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>PLAYER NAME</th>
+                                            <th>PLAYER SCORE</th>
+                                            <th>TEAM NAME</th>
+                                            <th>TOURNAMENT NAME</th>
+                                            <th>USER NAME</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for player in p %}
+                                   <tr>
+                                       <td>#{{ player.player_id }}</td>
+                                        <td>{{ player.player_name }}</td>
+                                        <td>{{ player.player_score|add:player.place_pts }}</td>
+                                        <td>{% if player.team_id == '' %}**No Team**{% endif %}{{ player.team_id.team_name}}</td>
+                                        <td>{{ player.t_id.t_name}}</td>
+                                        <td>{% if player.user_id == '' %}UNK{% endif %}{{ player.user_id.user_name }}</td>
+                                   </tr>
+                                {% endfor %}
+
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>PLAYER NAME</th>
+                                            <th>PLAYER SCORE</th>
+                                            <th>TEAM NAME</th>
+                                            <th>TOURNAMENT NAME</th>
+                                            <th>USER NAME</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "header.html" %}
+{% load django_template_maths %}
+{% block content %}
+
+<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <strong>Team</strong> Table</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>PLAYER NAME</th>
+                                            <th>TOTAL SCORE</th>
+                                            <th>KILL POINTS</th>
+                                            <th>PLACEMENT PTS.</th>
+                                            <th>UPLOAD SCORE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for player in p %}
+                                   <tr>
+                                       <form method="POST" action="/edit-score-player/{{ player.player_id }}" data-parsley-validate="">
+                                           {% csrf_token %}
+                                        <td>{{ player.player_name }}</td>
+                                        <td>{{ player.player_score|add:player.place_pts }}</td>
+                                        <td width="10%">
+                                            <div class="dataTables_filter">
+                                                <label class="focused">
+                                                     <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0" value="{{ player.player_score }}" id={{ player.player_name }} style="text-align:center" name="k_score" data-parsley-type="digits">
+                                                 </label>
+                                             </div>
+                                            <br/>
+                                        </td>
+                                       <td width="10%">
+                                           <div class="dataTables_filter">
+                                               <label class="focused">
+                                                   <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0" value="{{ player.place_pts }}" style="text-align:center" name="p_score" data-parsley-type="digits">
+                                               </label>
+                                           </div>
+                                       </td>
+                                           <td>
+                                                <button class="btn btn-primary btn-lg m-l-15 waves-effect" type="submit">Update</button>
+                                           </td>
+                                        </td>
+                                       </form>
+                                   </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "header1.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_games.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Games</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Games</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+        <!-- Team Player Section Start -->
+        <div class="rs-team style2 pt-40 md-pt-80">
+            <div class="container">
+                <div class="row pb-40 md-pb-80">
+                            {% for game in g_obj %}
+                    <div class="col-xl-3 col-lg-4 col-md-6 mb-30">
+                        <div class="player-item">
+                            <div class="player-img">
+                                <a href="/client_page/view-tourney/{{ game.game_id }}"><img src="/static/assets/images/my_images/{{ game.wallpaper }}" alt=""></a>
+                            </div>
+                            <div class="detail-wrap">
+                                <div class="person-details">
+                                    <h3 class="player-title"><span class="squad-numbers"></span>
+                                        <a href="/client_page/view-tourney/{{ game.game_id }}">{{ game.game_name }}</a>
+                                        <span class="player-position">{{ game.platform }}</span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+        <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Team Pyaler Section End -->
+
+
+{% endblock %}

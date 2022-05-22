@@ -1,0 +1,277 @@
+{% extends "header1.html" %}
+{% load static %}
+{% load django_template_maths %}
+{% block content %}
+        <!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_tournament.jpg' %}" alt="Breadcrumbs Image" width="1" height="" >
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">{{ td_obj.t_name }}</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Tournaments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="rs-single-club sec-bg md-pb-80">
+            <div class="container">
+                <div class="rs-tab pb-45 md-pb-60">
+                    <div class="club-details_data">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#result">Latest Results</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#player">Participants</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#info">Information</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade show" id="result">
+                                <!-- Point Table Start -->
+                                {% if td_obj.team_limit == 1 %}
+                                <h2>Players Score</h2>
+                                {% endif %}
+                                {% if td_obj.team_limit > 1 %}
+                                <h2>Teams Score</h2>
+                                {% endif %}
+                                    <hr>
+                                {% if td_obj.activate_result == 1 %}
+                                <div class="rs-pointtable inner-style pt-25 md-pt-80 md-pb-80">
+                                    <div class="container">
+                                        <div class="point-table-wrap pb-100 md-pb-80">
+                                            <table style="text-align:center">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>
+                                                            Place
+                                                        </th>
+                                                        <th>
+                                                            <center>
+                                                                {% if td_obj.team_limit == 1 %}
+                                                                Player Name
+                                                                {% endif %}
+                                                                {% if td_obj.team_limit > 1 %}
+                                                                Team Name{% endif %}
+                                                            </center>
+                                                        </th>
+                                                        {% if td_obj.team_limit == 1 %}
+                                                        <th>Kill PTS.</th>
+                                                        <th>Place PTS.</th>
+                                                        <th>Total Score</th>
+                                                        {% endif %}
+                                                        {% if td_obj.team_limit > 1 %}
+
+                                                        <th><center>Team Player name</center></th>
+                                                        <th><center>Player's Score</center></th>
+                                                        <th><center>Place PTS.</center></th>
+                                                        <th><center>Total Score</center></th>
+                                                        {% endif %}
+                                                    </tr>
+                                                    {% if td_obj.team_limit == 1 %}
+                                                       {% for p in p_obj %}
+                                                        <tr>
+                                                            <td><h5>{{ forloop.counter }}</h5></td>
+                                                            <td>{{ p.player_name }}</td>
+                                                            <td>{{ p.player_score }}</td>
+                                                            <td>{{ p.place_pts }}</td>
+                                                            <td>{{ p.player_score|add:p.place_pts }}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+
+
+                                                    {% if td_obj.team_limit > 1 %}
+                                                       {% for t in team_obj %}
+                                                        <tr>
+                                                            <td>
+                                                                <h4>{{ forloop.counter }}</h4>
+                                                            </td>
+                                                            <td>{{ t.team_name }}</td>
+                                                            <td><ul>
+                                                            {% for p in p_obj %}
+                                                                    {% if p.team_id_id == t.team_id %}
+                                                                    <li>{{ p.player_name }}</li>
+                                                                    {% endif %}
+                                                            {% endfor %}
+
+                                                                </ul>
+                                                            </td>
+                                                            <td><ul>
+                                                            {% for p in p_obj %}
+                                                                    {% if p.team_id_id == t.team_id %}
+                                                                    <li>{{ p.player_score }}</li>
+                                                                    {% endif %}
+                                                            {% endfor %}
+
+                                                                </ul>
+                                                            </td>
+                                                            <td>
+                                                                {{ t.place_pts }}
+                                                            </td>
+                                                            <td>
+                                                                <strong>{{ t.team_score }}</strong>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Point Table End -->
+                                {% else %}
+                                            <div align="center">
+                                                <h5>
+                                                    Result to be Determined
+                                                </h5>
+                                            </div>
+                                            {% endif %}
+                            </div>
+                            <div class="tab-pane fade" id="player">
+                                <!-- Point Table Start -->
+                                {% if td_obj.team_limit == 1 %}
+                                <h2>Players</h2>
+                                {% endif %}
+                                {% if td_obj.team_limit > 1 %}
+                                <h2>Teams</h2>
+                                {% endif %}
+                                    <hr>
+                                <div class="rs-pointtable inner-style pt-25 md-pt-80 md-pb-80">
+                                    <div class="container">
+                                        <div class="point-table-wrap pb-100 md-pb-80">
+                                            <table style="text-align:center">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>
+                                                            <center>
+                                                                {% if td_obj.team_limit == 1 %}
+                                                                Player Name
+                                                                {% endif %}
+                                                                {% if td_obj.team_limit > 1 %}
+                                                                Team Name
+                                                                {% endif %}
+                                                            </center>
+                                                        </th>
+                                                        {% if td_obj.team_limit > 1 %}
+                                                        <th>
+                                                            <center>
+                                                                Team Player name
+                                                            </center>
+                                                        </th>
+                                                        {% endif %}
+                                                    </tr>
+                                                    {% if td_obj.team_limit == 1 %}
+                                                       {% for p in p_obj_name %}
+                                                        <tr>
+                                                            <td><h5>{{ forloop.counter }}</h5></td>
+                                                            <td>{{ p.player_name }}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+
+
+                                                    {% if td_obj.team_limit > 1 %}
+                                                       {% for t in team_obj_name %}
+                                                        <tr>
+                                                            <td>
+                                                                <h4>{{ forloop.counter }}</h4>
+                                                            </td>
+                                                            <td>{{ t.team_name }}</td>
+                                                            <td><ul>
+                                                            {% for p in p_obj %}
+                                                                    {% if p.team_id_id == t.team_id %}
+                                                                    <li>{{ p.player_name }}</li>
+                                                                    {% endif %}
+                                                            {% endfor %}
+
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Point Table End -->
+                            </div>
+                            <div class="tab-pane fade show active" id="info">
+                                <div class="rs-blog modify sec-bg pt-25 md-pt-80 md-pb-80">
+                                    <div class="container">
+                                        <div class="pb-25 md-pb-20">
+                                            <div class="single-blog-wrap">
+                                                <div class="single-content-full white-bg">
+                                                    <div class="bs-desc">
+                                                        <h2>Description </h2>
+                                                        <h5>{{ td_obj.t_desc|linebreaksbr}}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div>
+                                            {% if td_obj.reg_open == 1 %}
+                                                {% if td_obj.re_player <= td_obj.player_limit  %}
+                                                <div class="pb-25 md-pb-40">
+                                                    <div class="submit-comment">
+                                                        {% if  u_id != request.session.uid %}
+                                                        <center>
+                                                            <a href="/client_page/register-tournament/{{ td_obj.t_id }}">
+                                                                <button class="readon">Register to the tournament</button>
+                                                            </a>
+                                                        </center>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+{% endblock %}

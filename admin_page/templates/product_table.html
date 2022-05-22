@@ -1,0 +1,108 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <strong>Product</strong> Table</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                             <a href="/product-insert">Insert</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                            <span  {% if message.tags %} class="{{ message.tags }} " {% endif %}> 
+                                <script type="text/javascript">
+                                    alert("Inserted Successfully");
+                                </script>
+                            </span>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Prouct Name</th>
+                                            <th>Product Price</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th>Category</th>
+                                            <th>Image</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for product in p %}
+                                        <tr>
+                                            <td>#{{ product.p_id }}</td>
+                                        <td width="20%" class="my_td">
+                                            <p>
+                                                {{ product.p_name }}
+                                            </p>
+                                        </td>
+                                        <td>₹{{ product.p_price }}</td>
+                                        <td class="my_td">
+                                            <p>
+                                                {{ product.p_desc|linebreaksbr}}
+                                            </p>
+                                        </td>
+                                        {% if product.in_stock == 'In Stock' %}
+                                        <td><span class="label l-bg-purple shadow-style">{{ product.in_stock }}</span></td>
+                                        {% endif %}
+                                       {% if product.in_stock == 'Out of Stock' %}
+                                        <td><span class="label l-bg-orange shadow-style">{{ product.in_stock }}</span></td>
+                                        {% endif %}
+                                       {% if product.in_stock == 'Few Lefts' %}
+                                        <td><span class="label l-bg-cyan shadow-style">{{ product.in_stock }}</span></td>
+                                        {% endif %}
+
+                                       <td> {{ product.c_id.c_name }}</td>
+                                        <td class="table-img sorting_1">
+                                            <img src="/static/assets/images/my_images/{{ product.p_image }}" width="150" >
+                                        </td>
+                                       <td>
+                                            <button class="btn tblActnBtn" >
+                                                <a href="/productupdate/{{ product.p_id }}" ><i class="material-icons">mode_edit</i></a>
+                                            </button>
+                                            <button class="btn tblActnBtn">
+                                                <a href="/productdelete/{{ product.p_id }}" onclick="return confirm('Do you really want to delete this item?');"><i class="material-icons">delete</i></a>
+                                            </button>
+                                        </td>
+
+                                   </tr>
+                                {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                                        <script>
+	                                   		$readMoreJS.init({
+	                                   			target: '.my_td p',
+	                                   			numOfWords: 15,
+	                                   			toggle: true,
+	                                   			moreLink: 'View more...',
+	                                   			lessLink: 'View less...'
+	                                   		});
+	                                   </script>
+{% endblock %}

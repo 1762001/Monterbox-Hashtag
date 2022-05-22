@@ -1,0 +1,151 @@
+{% extends "header1.html" %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_myaccount.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">My account</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">My account</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+        <!-- Account Login Start -->
+        <div id="rs-my-account" class="rs-my-account pt-100 md-pb-80 md-pt-80">
+            <div class="container">
+                <div class="row pb-100 md-pb-72">
+                    <div class="col-lg-7 md-mb-70">
+                        <div class="regi-side">
+                            <div class="sec-title">
+                                <h2 class="title">Registration</h2>
+                            </div>
+                            <form class="register-form" id="register-form" method="post" action="/client_page/client_registration" data-parsley-validate="">
+                                {% csrf_token %}
+                                <label class="input-label">Username <span class="req">*</span></label>
+                                <input class="custom-placeholder" type="text" name="user_name" required="">
+
+                                <label class="input-label">Email Address <span class="req">*</span></label>
+                                <input class="custom-placeholder" type="email" name="email" required="">
+                                {% if form.errors %}
+                                    {% for field in form %}
+					                    {% if field.errors %}<li style="color:red">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+				                    {% endfor %}
+                                {% endif %}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="margin-space gender-detect">
+                                            <label class="input-label">Gender <span class="req">*</span></label>
+                                            <br>
+                                            <label>
+                                                <input class="radio-btn" type="radio" name="user_gender" checked value="Male" required=""><span>Male</span>
+                                            </label>
+                                            <label>
+                                                <input class="radio-btn" type="radio" name="user_gender" value="Female" required=""><span>Female</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="margin-space">
+                                            <span data-type="selectors" data-name="birthday_wrapper">
+                                                <label class="input-label">Date of Birth <span class="req">*</span></label>
+                                                <br>
+                                                <span>
+                                                    <input class="custom-placeholder" type="date" name="user_dob" required="">
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label class="input-label">Contact Number <span class="req">*</span></label>
+                                <input class="custom-placeholder" type="text" name="contact" required="" data-parsley-type="digits" data-parsley-minlength="10" data-parsley-minlength-message="Minimum Length 10 Digits" data-parsley-maxlength="10" data-parsley-maxlength-message="Maximum Length 10 Digits">
+
+                                <label class="input-label">Password <span class="req">*</span></label>
+                                <input class="custom-placeholder" type="password" name="password" required="" data-parsley-pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*" data-parsley-pattern-message="Your password must contain at least (1) lowercase and (1) uppercase letter (1) number." data-parsley-minlength="6" data-parsley-maxlength="10">
+
+                                <span>
+                                    <li>Your password must contain at least (1) lowercase and (1) uppercase letter (1) number.</li>
+                                    <li>Minimum Length 6.</li>
+                                    <li>Maximum Length 10.</li>
+                                </span>
+
+                                <br/>
+
+                                <div class="submit-btn">
+                                    <button class="readon" type="submit">Create Account</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="login-side">
+                            <div class="sec-title">
+                                <h2 class="title">Login</h2>
+                            </div>
+                            <form class="login-form" action="/client_page/client_login" method="post">
+                                {% csrf_token %}
+                                <label class="input-label">Username or email address <span>*</span></label>
+                                <input class="input-control" type="email" name="u_name" required>
+                                <label class="input-label">Password <span>*</span></label>
+                                <input class="input-control" type="password" name="pwd" required>
+
+					            <div>
+    						        <span style="color:red">
+	    						        {% for data in messages %}
+		    						        <p><font size="3"> {{ data }}</font> </p>
+			    				        {% endfor %}
+				    		        </span>
+					            </div>
+                                <div class="login-control">
+                                    <ul>
+                                        <li><button type="submit" class="readon">Login</button></li>
+                                        <li>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="Remember"> Remember me
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a class="psw-recover" href="forgot">Lost Your Password?</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7 md-margin-0">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Account Login End -->
+{% endblock %}

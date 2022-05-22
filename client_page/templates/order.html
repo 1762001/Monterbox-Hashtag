@@ -1,0 +1,131 @@
+{% extends "header1.html" %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_shop.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Your Orders</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Cart</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+        <!-- Cart Section Start -->
+        <div class="rs-cart pt-100 md-pt-80">
+            <div class="container">
+                <div class="cart-wrap pb-100 md-pb-80">
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th class="product-name">Order Date</th>
+                                    <th class="product-quantity">Status</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-subtotal">View</th>
+                                    <th class="product-subtotal">Shipment</th>
+                                    <th class="product-subtotal">Payment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in order_object %}
+                                <tr>
+                                    <td class="product-name"><a href="#">{{ order.o_date }}</a></td>
+                                    {% if order.o_status == 0 %}
+                                        <td class="product-price" style="color:orange">Pending</td>
+                                    {% endif %}
+                                    {% if order.o_status == 1 %}
+                                        <td class="product-price" style="color:green">Accepted</td>
+                                    {% endif %}
+                                    {% if order.o_status == 2 %}
+                                        <td class="product-price" style="color:red">Rejected</td>
+                                    {% endif %}
+                                    <td class="product-price">₹{{ order.o_price }}</td>
+                                    <td class="product-price"><a href="/client_page/order_detail/{{ order.o_id }}">View Order</a></td>
+
+
+                                    {% if order.o_address == 'Not Uploaded Yet' %}
+                                        <td class="product-price"><a href="/client_page/edit-order/{{ order.o_id }}">Upload Shipment Details</a></td>
+                                        {% else %}
+                                        <td class="product-price" style="color:green">Details Uploaded</td>
+                                    {% endif %}
+
+
+                                    <td>
+
+                                    {% if order.o_status == 1 and order.p_status == 0 %}
+                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr/" method="post">
+                                        {% csrf_token %}
+                                            <input type="hidden" name="business" value="sireengothadiya20720@gmail.com">
+
+                                            <!-- Specify a Buy Now button. -->
+                                            <input type="hidden" name="cmd" value="_xclick">
+
+                                            <!-- Specify details about the item that buyers will purchase. -->
+                                            <input type="hidden" name="item_name" value="{{ request.session.username }}">
+		                                    <input type="hidden" name="amount" value="{{ order.o_price }}">
+                                            <input type="hidden" name="currency_code" value="INR">
+
+                                            <!-- Specify URLs -->
+                                            <input type='hidden' name='cancel_return' value='http://127.0.0.1:8000/client_page/failure'>
+
+                                            <input type='hidden' name='return' value='http://127.0.0.1:8000/client_page/success/{{ order.o_id }}'>
+
+                                            <!-- Display the payment button. -->
+
+                                            <input type="image" name="submit" border="0"
+                                            src="{% static 'images/pay_button.png' %}" alt="PayPal - The safer, easier way to pay online" width="120" height="40">
+
+                                    </form>
+                                    {% endif %}
+
+                                        {% if order.p_status == 1 %}
+                                            <h5>Cash Payment</h5>
+                                        {% endif %}
+
+                                        {% if order.p_status == 2 %}
+                                            <h5 style="color:green">Online Payment</h5>
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
+
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Cart Section End -->
+{% endblock %}

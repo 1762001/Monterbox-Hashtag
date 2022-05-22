@@ -1,0 +1,119 @@
+{% extends "header1.html" %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_shop.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Cart</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Cart</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+{% if messages %}
+    {% for message in messages %}
+    <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        <script type="text/javascript">
+            alert("Why so empty! :(");
+        </script>
+    </span>
+    {% endfor %}
+{% endif %}
+        <!-- Cart Section Start -->
+        <div class="rs-cart pt-100 md-pt-80">
+            <div class="container">
+                <div class="cart-wrap pb-100 md-pb-80">
+                    <form>
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th class="product-remove"></th>
+                                    <th class="product-thumbnail"></th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody> <style>
+                                        .ellipsis {
+                                                  text-overflow: ellipsis;
+                                                  /* Required for text-overflow to do anything */
+                                                  white-space: nowrap;
+                                                  overflow: hidden;
+                                                  max-width: 50ch;
+                                                  }
+                                    </style>
+                            {% for cart in cart_object %}
+                            {% csrf_token %}
+                                <tr>
+                                    <td class="product-remove"><a href="delete/{{cart.cart_id}}">×</a></td>
+                                    <td class="product-thumbnail"><a href="#"><img src="/static/assets/images/my_images/{{ cart.product_id.p_image }}" alt=""></a></td>
+                                    <td class="product-name ellipsis"><a href="#">{{ cart.product_id.p_name }}</a></td>
+                                    <td class="product-price"><span>₹</span>{{ cart.price }}</td>
+                                    <td class="product-quantity"><span>{{ cart.quantity }}</span></td>
+                                    <td class="subtotal"><span class="amount"><span class="symbol">     </span>{{ cart.added_date }}</span></td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </form>
+                    <div class="cart-collaterals pt-70 md-pt-50">
+                        <div class="cart-totals">
+                            <h5 class="title mb-25">Cart totals</h5>
+                            <table class="cart-total-table">
+                                <tbody>
+                                    <tr class="cart-subtotal">
+                                        <th>Subtotal</th>
+                                        <td><span class="amount"><span>₹</span>{{ total }}</span></td>
+                                    </tr>
+                                    <tr class="order-total">
+                                        <th>Total</th>
+                                        <td><strong><span class="amount"><span>₹</span>{{ total }}</span></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="wc-proceed-to-checkout">
+                                <a href="checkout/{{total}}" class="readon d-block"> Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Cart Section End -->
+{% endblock %}

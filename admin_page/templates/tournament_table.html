@@ -1,0 +1,143 @@
+{% extends "header.html" %}
+{% load django_template_maths %}
+{% block content %}
+
+<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <strong>Tournament</strong> Table</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="/tournament-insert/">Insert</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                            <span  {% if message.tags %} class="{{ message.tags }} " {% endif %}> 
+                                <script type="text/javascript">
+                                    alert("Inserted Successfully");
+                                </script>
+                            </span>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>TOURNAMENT NAME</th>
+                                            <th>TOURNAMENT DESC</th>
+                                            <th>PLAYER/TEAM LIMIT</th>
+                                            <th>PLAYER PERTEAM</th>
+                                            <th>REGISTERED PLAYER/TEAM</th>
+                                            <th>RESULT STATUS</th>
+                                            <th>FINISH DATE</th>
+                                            <th>REG OPEN?</th>
+                                            <th>GAME NAME</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for tournament in t %}
+                                   <tr>
+                                        <td>{{ tournament.t_name }}</td>
+                                        <td class="my_td">
+                                            <p>
+                                                {{ tournament.t_desc|linebreaksbr }}
+                                            </p>
+                                        </td>
+                                        <td>{{ tournament.player_limit|div:tournament.team_limit }}{% if tournament.team_limit > 1 %} Teams {% else %} Players{% endif %}</td>
+                                        <td>{{ tournament.team_limit }}</td>
+                                        <td>{{ tournament.re_player|div:tournament.team_limit }}{% if tournament.team_limit > 1 %} Team {% else %} Players{% endif %}</td>
+                                        <td>
+                                            {% if tournament.activate_result == 1 %}
+                                                <center>
+                                                    <span class="label bg-green shadow-style">Activated</span>
+                                                </center>
+                                            {% endif %}
+
+                                            {% if tournament.activate_result == 0 %}
+                                                <center>
+                                                    <span class="label bg-red shadow-style">Deactivated</span>
+                                                </center>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ tournament.finish_date }}</td>
+                                        <td>
+                                            {% if tournament.reg_open == 1 %}
+                                                <center>
+                                                    <span class="label bg-green shadow-style">Open</span>
+                                                </center>
+                                            {% endif %}
+
+                                            {% if tournament.reg_open == 0 %}
+                                                <center>
+                                                    <span class="label bg-red shadow-style">Close</span>
+                                                </center>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ tournament.game_id.game_name }}</td>
+                                        <td>
+                                            <button class="btn tblActnBtn" title="Edit">
+                                                <a href="/tournamentupdate/{{ tournament.t_id }}"><i class="material-icons">mode_edit</i></a>
+                                            </button>
+                                            <button class="btn tblActnBtn" title="Delete">
+                                                <a href="/tournamentdelete/{{ tournament.t_id }}" onclick="return confirm('Do you really want to delete this tournament?');"><i class="material-icons">delete</i></a>
+                                            </button>
+                                            <button class="btn tblActnBtn" title="Send Notification">
+                                                <a href="/send-notification/{{ tournament.t_id }}" style="color:black">
+                                                    <i class="fas fa-bell"></i>
+                                                </a>
+                                            </button>
+                                            <button class="btn tblActnBtn" title="Update Score">
+                                                <a href="/upload-score/{{ tournament.t_id }}" style="color:black">
+                                                    <i class="fas fa-upload"></i>
+                                                </a>
+                                            </button>
+                                        </td>
+                                   </tr>
+                                {% endfor %}
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>TOURNAMENT NAME</th>
+                                            <th>TOURNAMENT DESC</th>
+                                            <th>PLAYER/TEAM LIMIT</th>
+                                            <th>PLAYER PERTEAM</th>
+                                            <th>REGISTERED PLAYER/TEAM</th>
+                                            <th>RESULT STATUS</th>
+                                            <th>FINISH DATE</th>
+                                            <th>REG OPEN?</th>
+                                            <th>GAME NAME</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <script>
+			                    $readMoreJS.init({
+                				    target: '.my_td p',
+				                    numOfWords: 10,
+				                    toggle: true,
+				                    moreLink: 'View more...',
+				                    lessLink: 'View less...'
+			                    });
+	                            </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

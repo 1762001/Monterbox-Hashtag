@@ -1,0 +1,63 @@
+{% extends "header.html" %}
+
+{% block content %}
+
+<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <strong>User</strong> Table</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="#" onClick="return false;">Action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onClick="return false;">Another action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onClick="return false;">Something else here</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>USER NAME</th>
+                                            <th>EMAIL</th>
+                                            <th>USER DOB</th>
+                                            <th>USER GENDER</th>
+                                            <th>USER CONTACT</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in u %}
+                                   <tr>
+                                        <td>{{ user.user_name }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.user_dob }}</td>
+                                        <td>{{ user.user_gender }}</td>
+                                        <td>{{ user.contact }}</td>
+
+                                   </tr>
+                                {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

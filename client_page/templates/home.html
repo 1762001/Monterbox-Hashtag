@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zxx">
+{% load static %} {% load django_template_maths %}
+<!-- Mirrored from rstheme.com/products/html/khelo//client_page/home by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Jan 2022 09:31:39 GMT -->
+
+<head>
+    <!-- meta tag -->
+    <meta charset="utf-8">
+    <title>eSports | Devices and Battles</title>
+    <meta name="description" content="">
+    <!-- responsive tag -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
+    <!-- bootstrap v4 css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <!-- animate css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <!-- Slick css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+    <!-- off canvas css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/off-canvas.css' %}">
+    <!-- flaticon css  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/flaticon.css' %}">
+    <!-- magnific popup css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.css' %}">
+    <!-- rsmenu CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/rsmenu-main.css' %}">
+    <!-- swiper slider CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper.min.css' %}">
+    <!-- rsmenu transitions CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/rsmenu-transitions.css' %}">
+    <!-- rsanimations CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/rsanimations.css' %}">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <!-- rs-spaceing css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/rs-spaceing.css' %}">
+    <!-- responsive css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+</head>
+
+<body>
+    <!--Preloader area start here-->
+    <div id="loading" class="loading">
+        <div class="rs-loader">
+            <div class="rs-shadow"></div>
+            <div class="rs-gravity">
+                <div class="rs-ball"></div>
+            </div>
+        </div>
+    </div>
+    <!--Preloader area End here-->
+
+    <!--Full width header Start-->
+    <div class="full-width-header">
+        <!--Header Start-->
+        <header id="rs-header" class="rs-header homestyle">
+            <!-- Menu Start -->
+            <div class="menu-area menu-sticky">
+                <div class="container-fluid">
+                    <div class="row rs-vertical-middle">
+                        <div class="col-lg-2">
+                            <div class="logo-area">
+                                <a href="/client_page/home"><img src="{% static 'images/client_logo.png' %}" alt="logo"></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 mobile-menu-area">
+                            <div class="rs-menu-area display-flex-center">
+                                <div class="main-menu">
+                                    <a class="rs-menu-toggle">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                    <nav class="rs-menu">
+                                        <div class="expand-btn">
+                                            <span>
+                                                    <a class="hidden-xs rs-search"  href="/client_page/cart">
+                                                        <!-- <i class="flaticon-bag"></i> -->
+                                                        <div class="cart-button">
+                                                            <i class="fa fa-shopping-cart"></i></div>
+                                                        <!-- <img src="{% static 'images/hic-cart2.png' %}" > -->
+                                                    </a>
+                                                </span>
+                                            <span>
+                                                    <a class="hidden-xs rs-search"  href="/client_page/notifications">
+                                                        <!-- <i class="flaticon-bag"></i> -->
+                                                        <div class="cart-button">
+                                                            <i class="fa fa-bell"></i></div>
+                                                        <!-- <img src="{% static 'images/hic-cart2.png' %}" > -->
+                                                    </a>
+                                                </span>
+                                            <span>
+                                                    <a id="nav-expander" class="nav-expander">
+                                                        <ul class="offcanvas-icon">
+                                                            <li>
+                                                                <span class="hamburger1"></span>
+                                            <span class="hamburger2"></span>
+                                            <span class="hamburger3"></span>
+                                            </li>
+                                            </ul>
+                                            </a>
+                                            </span>
+                                        </div>
+                                        <ul class="nav-menu text-right">
+                                            <!-- Home -->
+                                            <li class="current-menu-item current_page_item menu-item-has-children"> <a href="/client_page/home" class="home">Home</a>
+
+                                            </li>
+                                            <!-- End Home -->
+
+                                            <!-- Club Directory Menu Start -->
+                                            <li class="rs-mega-menu mega-rs menu-item-has-children"> <a href="/client_page/games">Browse Games</a>
+                                            </li>
+                                            <!--Club Directory Menu End -->
+
+                                            {% if request.session.username %}
+                                            <!-- Pages Menu Start -->
+                                            <li class="menu-item-has-children"><a href="/client_page/my_tournaments">My Tournaments</a>
+
+                                            </li>
+                                            {% endif %}
+                                            <!-- Pages Menu End -->
+
+                                            <!--Point Table Start-->
+                                            <li class="menu-item-has-children"><a href="/client_page/category">Shop Categories</a>
+                                                <ul class="sub-menu">
+
+                                                    {% for cat in categories %}
+                                                    <li><a href="/client_page/shop/cat/{{cat.c_id}}">{{ cat.c_name}}</a></li>
+                                                    {% endfor %} -->
+                                                </ul>
+                                            </li>
+                                            <!--Point Table End-->
+
+                                            <!--Point Table Start-->
+                                            <li class="menu-item-has-children"><a href="/client_page/contact_us">Contact Us</a>
+
+                                            </li>
+                                            <!--Point Table End-->
+
+                                            {% if request.session.username %}
+                                            <!--News Start-->
+                                            <li class="menu-item-has-children"> <a href="/client_page/order">My Orders</a></li>
+                                            {% endif %}
+                                            <!--Point Table End-->
+
+                                        </ul>
+                                        <!-- //.nav-menu -->
+                                    </nav>
+                                </div>
+                                <!-- //.main-menu -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Menu End -->
+            <!-- Canvas Menu start -->
+            <nav class="right_menu_togle hidden-md">
+                <div class="close-btn"><span id="nav-close" class="text-center"><i class="flaticon-cross"></i></span></div>
+                <div class="canvas-logo">
+                    <a href="/client_page/home"><img src="{% static 'images/client_logo2.png' %}" alt="logo"></a>
+                </div>
+                <div class="sidebarnav_menu">
+                    <ul>
+                        <li>
+                            <h5>Hi, {% if not request.session.user_name %}Guest User{% endif %}{{ request.session.user_name }}</h5>
+                        </li>
+                        <li class="active"><a href="/client_page/home">Home</a></li>
+                        <li><a href="/client_page/category">Shop</a></li>
+                        {% if request.session.username %}
+                        <li><a href="/client_page/my_tournaments">My Tournaments</a></li>
+                        <li><a href="/client_page/order">My Order</a></li>
+                        {% endif %} {% if request.session.username %}
+                        <li><a href="/client_page/edit_profile">Edit Profile</a></li>
+                        <li>
+                            <div class="read-btn">
+                                <a href="/client_page/client_logout"><button type="submit" class="readon">Logout</button></a>
+                            </div>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <div class="read-btn">
+                                {% if not request.session.username %}
+                                <a href="/client_page/client_login"><button type="submit" class="readon">Login / Register</button></a> {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="canvas-contact">
+                    <h5 class="canvas-contact-title">Contact Info</h5>
+                    <ul class="contact">
+                        <li><i class="fa fa-globe"></i>Odisha, India</li>
+                        <li><i class="fa fa-phone"></i><a href="tel:+125427263512">+91 8709007717</a></li>
+                        <li><i class="fa fa-envelope"></i><a href="mailto:kumarashwini123abc@gmail.com">kumarashwini123abc@gmail.com</a></li>
+                    </ul>
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Canvas Menu end -->
+        </header>
+        <!--Header End-->
+    </div>
+    <!--Full width header End-->
+
+    <!-- Slider Section Start -->
+    <div id="rs-slider" class="rs-slider home-slider slider-navigation">
+        <div class="slider-carousel owl-carousel">
+            <div class="single-slider">
+                <div class="container">
+                    <div class="text-part">
+                        <h2 class="sub-title wow fadeInLeft" data-wow-delay="1s">Welcome to MonterBox</h2>
+                        <h1 class="title wow fadeInRight" data-wow-delay="1s"><span class="primary-color">eSports</span> Club</h1>
+                        <div class="desc wow fadeInLeft" data-wow-delay="1s">With the latest gaming to power your gaming PC, experience the performance you need to game, stream, and record.<br>This has led us to develop our product line which includes Gaming Keyboards, Mousepads, Headphones and <br>Gaming
+                            Chairs with key emphasis on ergonomics and durability.</div>
+                        <div class="slider-btn wow fadeInRight" data-wow-delay="1s">
+                            <a class="readon" href="/client_page/category">Visit Our Shop</a>
+                        </div>
+                    </div>
+                    <div class="fly-layer">
+                        <div class="layer-image">
+                            <div class="animate4">
+                                <img src="{% static 'images/slider/pubg_slider.png' %}" alt="Slider Layer Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider slide2">
+                <div class="container">
+                    <div class="image-part common">
+                        <div class="image-wrap">
+                            <img class="player animate5" src="{% static 'images/slider/fortnite-png.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="text-part common">
+                        <h2 class="sub-title">The Esports Technology To</h2>
+                        <h1 class="title"><span class="primary-color">Engage</span> Your Performance</h1>
+                        <h2 class="sub-title">In all battle royale</h2>
+                        <div class="slider-btn">
+                            <a class="readon" href="/client_page/games">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Slider Section End -->
+
+    <!-- Upcomming Match & Video Section Start -->
+    <div class="couter-and-upcomming pt-40 md-pt-80 mb-30">
+        <div class="container">
+            <div class="title-style text-center mb-50 md-mb-30">
+                <h2 class="margin-0 uppercase">OPEN TOURNAMENTS</h2>
+                <span class="line-bg y-b pt-10"></span>
+            </div>
+        </div>
+    </div>
+    <!-- Upcomming Match & Video Section End -->
+
+    <!-- Match Result Section Start -->
+    <div class="rs-match-result style1 nav-style pb-100 md-pb-80">
+        <div class="container">
+            <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-autoplay-timeout="8000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-mobile-device="1" data-mobile-device-nav="false"
+                data-mobile-device-dots="false" data-ipad-device="2" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="1" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="3" data-md-device-nav="true"
+                data-md-device-dots="false">
+                {% for t in t_open %}
+                <div class="items">
+                    <a href="/client_page/view-t-detail/{{ t.t_id }}">
+                        <div class="vanues">
+                            <div class="stadium">{{ t.game_id.game_name }}</div>
+                            <div></div>
+                            <div class="date">
+                                <h5 style="color:white">{{ t.t_name }}</h5>
+                            </div>
+                        </div>
+                        <div></div>
+                        <div class="teams">
+                            <div class="score">{{ t.re_player|div:t.team_limit }}/{{ t.player_limit|div:t.team_limit }} {% if t.team_limit != 1 %}Teams{% endif %}{% if t.team_limit == 1 %}Players{% endif %}</div>
+                        </div>
+                        <div></div>
+
+                        <div>Reg. ends on: <span style="color:#fbc02d">{{ t.finish_date }}</span></div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Match Result Section End -->
+
+    <!-- Latest News Section Start -->
+    <div class="couter-and-upcomming md-pt-10 mb-30">
+        <div class="container">
+
+            <div class="title-style text-center mb-50 md-mb-30">
+                <h2 class="margin-0 uppercase">PAST TOURNAMENTS</h2>
+                <span class="line-bg y-b pt-10"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="rs-latest-news sec-bg pt-91 md-pt-70 md-pb-80">
+        <div class="rs-match-result style1 nav-style pb-100 md-pb-80">
+            <div class="container">
+                <style type="text/css">
+                    .date h5 {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                    }
+                </style>
+                <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-autoplay-timeout="8000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-mobile-device="1" data-mobile-device-nav="false"
+                    data-mobile-device-dots="false" data-ipad-device="2" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="1" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="3" data-md-device-nav="true"
+                    data-md-device-dots="false">
+                    {% for t in t_close %}
+                    <div class="items">
+                        <a href="/client_page/view-t-detail/{{ t.t_id }}">
+                            <div class="vanues">
+                                <div class="stadium">{{ t.game_id.game_name }}</div>
+                                <div></div>
+                                <div class="date">
+                                    <h5 style="color:white">{{ t.t_name }}</h5>
+                                </div>
+                            </div>
+                            <div></div>
+                            <div class="teams">
+                                <div class="score">{{ t.re_player|div:t.team_limit }}/{{ t.player_limit|div:t.team_limit }} {% if t.team_limit != 1 %}Teams{% endif %}{% if t.team_limit == 1 %}Players{% endif %}</div>
+                            </div>
+                            <div></div>
+
+                            <div>Reg. ends on: <span style="color:#fbc02d">{{ t.finish_date }}</span></div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Latest News Section End -->
+
+    <!-- About Us Section Start -->
+    <div class="rs-about bg4 pt-92 pb-78 md-pt-72 md-pb-58">
+        <div class="container">
+            <div class="row rs-vertical-middle">
+                <div class="col-lg-5 md-mb-30">
+                    <div class="contant-part">
+                        <div class="title-style mb-50 md-mb-30">
+                            <h2 class="margin-0 uppercase white-color">Who We Are</h2>
+                            <span class="line-bg left-line y-w pt-10"></span>
+                        </div>
+                        <div class="description dark-gray-color">
+                            <p class="mb-3">We offer players of all levels the opportunity to compete in their favorite game, win tournaments, and be part of the esports community.</p>
+                            <p class="margin-0">Up to 100 players per game, matches spanning a dozen games or championships over many races, results based on position and kills, all of this is covered by our Free-for-all structures and advanced match formats.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 margin-0 pl-40 col-padding-md">
+                    <div class="image-part">
+                        <img src="{% static 'images/about/about_us.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Us Section End -->
+
+
+    <!-- Counter Section Start -->
+    <div class="rs-counter bg5 style1 pt-103 pb-92 md-pt-80 md-pb-70 sm-pt-73">
+        <div class="container">
+
+            <div class="rs-count">
+
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 md-mb-30">
+                        <div class="rs-counter-list text-center">
+                            <h2 class="counter-number primary-color">{{ g_count }}</h2>
+                            <h3 class="counter-text uppercase white-color">Total Games</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 md-mb-30">
+                        <div class="rs-counter-list text-center">
+                            <h2 class="counter-number primary-color">{{ t_count }}</h2>
+                            <h3 class="counter-text uppercase white-color">Total Tournaments</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="rs-counter-list text-center">
+                            <h2 class="counter-number primary-color">{{ p_count }}</h2>
+                            <h3 class="counter-text uppercase white-color">Total players</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="rs-counter-list text-center">
+                            <h2 class="counter-number primary-color">{{ u_count }}</h2>
+                            <h3 class="counter-text uppercase white-color">Total Users</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Counter Section End -->
+
+    <!-- Match Gallery Start -->
+    <div class="rs-gallery style1 pt-92 pb-100 md-pt-72 md-pb-80">
+        <div class="container">
+            <div class="title-style text-center mb-50 md-mb-30">
+                <h2 class="margin-0 uppercase">FEATURED GAMES</h2>
+                <span class="line-bg y-b pt-10"></span>
+            </div>
+            <div class="row pl-15 pr-15">
+                <div class="col-lg-4 col-md-6 padding-0 sm-mb-30">
+                    <div class="gallery-grid">
+                        <img src="/static/assets/images/my_images/pubg_wallpaper.jpg" alt="Gallery Image">
+                        <a class="image-popup view-btn" href="/static/assets/images/my_images/pubg_wallpaper.jpg">
+                            <i class="flaticon-add-circular-button"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 padding-0 sm-mb-30">
+                    <div class="gallery-grid">
+                        <img src="/static/assets/images/my_images/fortnite_wallpaper.jpg" alt="Gallery Image">
+                        <a class="image-popup view-btn" href="/static/assets/images/my_images/fortnite_wallpaper.jpg">
+                            <i class="flaticon-add-circular-button"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 padding-0 sm-mb-30">
+                    <div class="gallery-grid">
+                        <img src="/static/assets/images/my_images/apex_wallpaper.jpg" alt="Gallery Image">
+                        <a class="image-popup view-btn" href="/static/assets/images/my_images/apex_wallpaper.jpg">
+                            <i class="flaticon-add-circular-button"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 padding-0 sm-mb-30">
+                    <div class="gallery-grid">
+                        <img src="/static/assets/images/my_images/cod4_wallpaper.jpg" alt="Gallery Image">
+                        <a class="image-popup view-btn" href="/static/assets/images/my_images/cod4_wallpaper.jpg">
+                            <i class="flaticon-add-circular-button"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 padding-0 sm-mb-30">
+                    <div class="gallery-grid">
+                        <img src="/static/assets/images/my_images/freefire_wallpaper.jpg" alt="Gallery Image">
+                        <a class="image-popup view-btn" href="/static/assets/images/my_images/freefire_wallpaper.jpg">
+                            <i class="flaticon-add-circular-button"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 padding-0">
+                    <div class="gallery-grid">
+                        <img src="/static/assets/images/my_images/pubgm_wallpaper.jpg" alt="Gallery Image">
+                        <a class="image-popup view-btn" href="/static/assets/images/my_images/pubgm_wallpaper.jpg">
+                            <i class="flaticon-add-circular-button"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Match Gallery End -->
+
+    <!-- Top Products Start -->
+    <div class="rs-products nav-style pt-23 md-pt-36">
+        <div class="container">
+            <div class="title-style text-center mb-50 md-mb-30">
+                <h2 class="margin-0 uppercase">Our Products</h2>
+                <span class="line-bg y-b pt-10"></span>
+            </div>
+            <div class="rs-carousel owl-carousel mb-100 md-mb-80" data-loop="true" data-items="4" data-margin="30" data-autoplay="true" data-autoplay-timeout="8000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-mobile-device="1"
+                data-mobile-device-nav="false" data-mobile-device-dots="false" data-ipad-device="3" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="2" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="4"
+                data-md-device-nav="true" data-md-device-dots="false">
+                {% for product in p_obj %}
+                <div class="products">
+                    <div class="product-img">
+                        <a href="/client_page/product-detail/{{ product.p_id }}"><img src="/static/assets/images/my_images/{{ product.p_image }}"></a>
+                    </div>
+
+                    <style type="text/css">
+                        h4 {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                        }
+                    </style>
+                    <h4 class="product-title "><a href="/client_page/product-detail/{{ product.p_id }}">{{ product.p_name }}</a></h4>
+                    <span class="product-price">
+                            <span class="symbol">₹</span>{{ product.p_price }}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Subscribe Section Start -->
+            <!-- <div class="rs-subscribe bg7">
+                <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                    {% csrf_token %}
+                    <div class="row rs-vertical-middle">
+                        <div class="col-lg-6 col-md-12 md-mb-30">
+                            <div class="title-part">
+                                <h2 class="title white-color"> Subscribe For Update</h2>
+                                <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="subscribe-form-fields">
+                                <input type="submit" class="news-submit" value="Subscribe">
+                                <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div> -->
+            <!-- Subscribe Section End -->
+        </div>
+    </div>
+    <!-- Top Products End -->
+
+    <!-- Footer Start -->
+    <footer id="rs-footer" class="rs-footer pt-137 md-pt-70 sm-pt-65">
+        <!-- Sponsor Logo Section Start -->
+        <div class="rs-sponsor pb-35 md-pb-60 sm-pb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/1.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/2.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/3.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/4.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/5.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/6.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/7.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="logos">
+                                    <a href="#"><img src="{% static 'images/sponsor/8.png' %}" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sponsor Logo Section End -->
+
+        <!-- Footer Bottom Section Start -->
+        <div class="footer-bootom">
+            <div class="container">
+                <div class="row rs-vertical-middle">
+                    <div class="col-md-7">
+                        <div class="copyright">
+                            <p>Hashtag 2022. All Rights Reserved. Developed by <a href="/client_page/home">Team_Hashtag</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="footer-share text-right">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom Section End -->
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Scrool to Top Start -->
+    <div id="scrollUp">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scrool to Top End -->
+
+    <!-- Search Modal Start -->
+    <!-- <div aria-hidden="true" class="modal fade search-modal" role="dialog" tabindex="-1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="flaticon-cross"></span>
+            </button>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="search-block clearfix">
+                        <form>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Search Here.." type="text">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    <!-- Search Modal End -->
+
+    <!-- modernizr js -->
+    <script src="{% static 'js/modernizr-2.8.3.min.js' %}"></script>
+    <!-- jquery latest version -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- owl.carousel js -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- slick js -->
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <!-- isotope.pkgd.min js -->
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <!-- imagesloaded.pkgd.min js -->
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <!-- wow js -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <!-- magnific popup -->
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- rsmenu js -->
+    <script src="{% static 'js/rsmenu-main.js' %}"></script>
+    <!-- plugins js -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <!-- counter top js -->
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <!-- swiper slider js -->
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <!-- main js -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+<!-- Mirrored from rstheme.com/products/html/khelo//client_page/home by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Jan 2022 09:38:51 GMT -->
+
+</html>

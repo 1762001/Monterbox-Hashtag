@@ -1,0 +1,69 @@
+{% extends "header1.html" %}
+
+{% load static %}
+{% block content %}
+
+
+
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_shop.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Shop</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Products</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+        <!-- Top Products Start -->
+        <div class="rs-products pt-100 md-pt-80">
+            <div class="container">
+                <div class="row pb-100 md-pb-80">
+                    {% for category in c %}
+                    <div class="col-lg-4 col-md-5 mb-30">
+                        <div class="products">
+                            <div class="product-img">
+                                <a href="/client_page/shop/cat/{{ category.c_id }}"><img src="/static/assets/images/my_images/{{ category.c_image }}" width="600" height="600"></a>
+                            </div>
+                            <h4 class="product-title"><a href="/client_page/shop/cat/{{ category.c_id }}">{{ category.c_name }}</a></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Top Products End -->
+
+{% endblock %}

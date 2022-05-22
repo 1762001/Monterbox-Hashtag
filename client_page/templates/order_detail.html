@@ -1,0 +1,88 @@
+{% extends "header1.html" %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_shop.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Order Details</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Order Details</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+        <!-- Cart Section Start -->
+        <div class="rs-cart pt-100 md-pt-80">
+            <div class="container">
+                <div class="cart-wrap pb-100 md-pb-80">
+                    <form>
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail"></th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <style>
+                                        .ellipsis {
+                                                  text-overflow: ellipsis;
+                                                  /* Required for text-overflow to do anything */
+                                                  white-space: nowrap;
+                                                  overflow: hidden;
+                                                  max-width: 55ch;
+                                                  }
+                                    </style>
+                            {% for order in o_obj %}
+                            {% csrf_token %}
+                                <tr>
+                                    <td class="product-thumbnail"><a href="#"><img src="/static/assets/images/my_images/{{ order.product_id.p_image }}" alt=""></a></td>
+                                    <td class="product-name ellipsis"><a href="/client_page/product-detail/{{order.product_id_id}}">{{ order.product_id.p_name}}</a></td>
+                                    <td class="subtotal"><span class="amount"><span>₹</span>{{ order.product_id.p_price}}</span></td>
+                                    <td class="product-name"><a href="#">{{ order.o_qty}}</a></td>
+                                    <td class="product-price"><span>₹</span>{{ order.total_price }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Cart Section End -->
+{% endblock %}

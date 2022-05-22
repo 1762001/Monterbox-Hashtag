@@ -1,0 +1,103 @@
+{% extends "header1.html" %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_myaccount.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Edit Profile</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">My account</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+        <!-- Account Login Start -->
+        <div id="rs-my-account" class="rs-my-account pt-100 md-pb-80 md-pt-80">
+            <div class="container">
+                <div class="row pb-100 md-pb-72">
+                    <div class="col-lg-7 md-mb-70">
+                        <div class="regi-side">
+                            <div class="sec-title">
+                                <h2 class="title">Your Profile</h2>
+                            </div>
+                            <form class="register-form" id="register-form" method="post" action="update_profile">
+                                {% csrf_token %}
+                                <label class="input-label">Username <span class="req">*</span></label>
+                                <input class="custom-placeholder" type="text" name="user_name" value="{{ u_obj.user_name }}">
+
+                                <label class="input-label">Email Address <span class="req">*</span></label>
+                                <input class="custom-placeholder" type="email" name="email" value="{{ u_obj.email }}">
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="margin-space gender-detect">
+                                            <label class="input-label">Gender <span class="req">*</span></label>
+                                            <br>
+                                            <label>
+                                                <input class="radio-btn" type="radio" name="user_gender" value="Male" {% if u_obj.user_gender == 'Male' %} checked {% endif %}><span>Male</span>
+                                            </label>
+                                            <label>
+                                                <input class="radio-btn" type="radio" name="user_gender" value="Female" {% if u_obj.user_gender == 'Female' %} checked {% endif %}><span>Female</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="margin-space">
+                                            <span data-type="selectors" data-name="birthday_wrapper">
+                                                <label class="input-label">Date of Birth <span class="req">*</span></label>
+                                                <br>
+                                                <span>
+                                                    <input class="custom-placeholder" type="date" name="user_dob" value="{{ dob }}">
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <label class="input-label">Contact Number <span class="req">*</span></label>
+                                <input class="custom-placeholder" type="text" name="contact" value="{{ u_obj.contact }}" maxlength="10">
+
+                                <div class="submit-btn">
+                                    <button class="readon" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7 md-margin-0">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Account Login End -->
+{% endblock %}

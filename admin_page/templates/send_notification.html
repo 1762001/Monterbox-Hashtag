@@ -1,0 +1,37 @@
+{% extends "header.html" %}
+{% block content %}
+            <!-- Input -->
+<section>
+    <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <strong>Send Notification</strong>
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <form method="POST" action="/send-notification/{{ tournament.t_id }}" data-parsley-validate="null" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                <label for="product_name">Notification For</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" id="product_name" name="p_name" data-parsley-required-message="This field is required" value="{{ tournament.t_name }}">
+                                    </div>
+                                </div>
+
+                                <label for="desc">Tournament Description</label>
+                                <div class="form-group">
+                                    <div class="form">
+                                        <textarea id="desc" name="desc" rows="5" class="form-control no-resize" placeholder="Description goes here. . . . . " data-parsley-required="true" data-parsley-required-message="Please enter some message"></textarea>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-lg m-l-15 waves-effect" type="submit">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+    {% endblock %}

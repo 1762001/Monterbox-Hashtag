@@ -1,0 +1,102 @@
+{% extends "header.html" %}
+
+{% block content %}
+
+<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <strong>Order</strong> Table</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ORDER DATE</th>
+                                            <th>USER NAME</th>
+                                            <th>ORDER TOTAL</th>
+                                            <th>ORDER ADDRESS</th>
+                                            <th>ORDER CONTACT</th>
+                                            <th>VIEW</th>
+                                            <th>ORDER STATUS</th>
+                                            <th>PAYMENT STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in o %}
+                                   <tr>
+                                        <td>{{ order.o_date }}</td>
+                                        <td>{{ order.user_id.user_name }}</td>
+                                        <td><h5><strong>₹{{ order.o_price }}</strong></h5></td>
+                                        <td>{{ order.o_address | linebreaksbr }}</td>
+                                        <td>{% if order.o_contact == '0' %}
+                                                Not Uploaded Yet
+                                            {% else %}
+                                                {{ order.o_contact }}
+                                            {% endif %}
+                                            </td>
+                                        <td><a href="/order-detail/{{ order.o_id }}">View Order</a></td>
+                                        <td>
+                                            {% if order.o_status == 0 %}
+                                            <center>
+                                                <a href="/accept/{{order.o_id}}">
+                                                    <span class="feedLblStyle lblTaskStyle">Accept</span>
+                                                </a>
+                                                <a href="/reject/{{order.o_id}}">
+                                                    <span class="feedLblStyle lblFileStyle">Reject </span>
+                                                </a>
+                                            </center>
+                                            {% endif %}
+
+                                            {% if order.o_status == 2 %}
+                                            <center>
+                                                <span class="label bg-red shadow-style">Rejected</span>
+                                            </center>
+                                            {% endif %}
+
+                                            {% if order.o_status == 1 %}
+                                            <center>
+                                                <span class="label bg-green shadow-style">Accepted</span>
+                                            </center>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            {% if order.o_status == 1 %}
+                                                {% if order.p_status == 0 %}
+                                                    <a href="/paid/{{ order.o_id }}">
+                                                        <span class="feedLblStyle lblTaskStyle">Paid</span>
+                                                    </a>
+                                                {% elif order.p_status == 1 %}
+                                                    <center>
+                                                        <span class="label bg-green shadow-style">Cash</span>
+                                                    </center>
+                                                {% else %}
+                                                    <center>
+                                                        <span class="label bg-green shadow-style">Online</span>
+                                                    </center>
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
+
+                                   </tr>
+                                {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

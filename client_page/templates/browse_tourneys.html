@@ -1,0 +1,121 @@
+{% extends "header1.html" %}
+{% load static %}
+{% load django_template_maths %}
+{% block content %}
+<!-- Breadcrumbs Section Start -->
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_tournament.jpg' %}" alt="Breadcrumbs Image" width="1" height="" >
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Tournaments of <br> {{ g_obj.game_name }}</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Tournaments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+        <div class="rs-single-club sec-bg md-pb-80">
+            <div class="container">
+                <div class="rs-tab pb-90 md-pb-60">
+                    <div class="club-details_data">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#club-history">Past</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#squad-list">Open</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="club-history">
+                                <div class="rs-result inner pt-25 md-pt-20">
+                                    <div class="container">
+                                        <div class="result-info pb-100 md-pb-80">
+                                            <style>
+                                                   table#some_table_id2 tr:nth-child(odd) { background-color:#ffffff; }
+                                            </style>
+
+                                            <table class="result-table" id="some_table_id2">
+                                                <tbody>
+                                                    {% for obj in t_obj %}
+                                                     {% if obj.reg_open == 0 %}
+                                                    <tr>
+                                                        <td><span><h3>{{ obj.t_name }}</h3></span></td>
+                                                        <td><span class="total-goal">{{ obj.re_player|div:obj.team_limit }}/{{ obj.player_limit|div:obj.team_limit }}</span><label>{% if obj.team_limit != '1' %}Teams{% endif %}{% if obj.team_limit == '1' %}Players{% endif %}</label></td>
+                                                        <td>{{ obj.start_date }} - {{ obj.finish_date }}</td>
+                                                        <td>{% if  obj.reg_open == '0' %}<font color="Red">Registration  Close</font>{% endif %}</td>
+                                                        <td><a href="/client_page/view-t-detail/{{ obj.t_id }}" class="readon">View Details</a></td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="squad-list">
+                                <div class="rs-result inner pt-25 md-pt-20">
+                                    <div class="container">
+                                        <div class="result-info pb-100 md-pb-80">
+                                            <style>
+                                                   table#some_table_id tr:nth-child(odd) { background-color:#ffffff; }
+                                            </style>
+
+                                            <table class="result-table" id="some_table_id">
+                                                <tbody>
+                                                    {% for obj in t_obj %}
+                                                    {% if obj.reg_open == 1 %}
+                                                    <tr style="nth-child(even) background-color:white;">
+                                                        <td><span><h3>{{ obj.t_name }}</h3></span></td>
+                                                        <td><span class="total-goal">{{ obj.re_player|div:obj.team_limit }}/{{ obj.player_limit|div:obj.team_limit }}</span><label>{% if obj.team_limit != 1 %}Teams{% endif %}{% if obj.team_limit == 1 %}Players{% endif %}</label></td>
+                                                        <td>{{ obj.start_date }} - {{ obj.finish_date }}</td>
+                                                        <td><font color="Green">Registration  Open</font></td>
+                                                        <td><a href="/client_page/view-t-detail/{{ obj.t_id }}" class="readon">View Details</a></td>
+                                                    </tr>
+                                                    {% endif %}
+
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Result Info Section End -->
+
+{% endblock %}

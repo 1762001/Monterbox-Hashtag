@@ -1,0 +1,101 @@
+{% extends "header1.html" %}
+{% load static %}
+
+{% block content %}
+
+
+        <div class="rs-breadcrumbs">
+            <div class="breadcrumbs-wrap">
+                <img src="{% static 'images/breadcrumbs/breadcrumb_shop.jpg' %}" alt="Breadcrumbs Image">
+                <div class="breadcrumbs-inner">
+                    <div class="container">
+                        <div class="breadcrumbs-text">
+                            <h1 class="breadcrumbs-title mb-17">Shop</h1>
+                            <div class="categories">
+                                <ul>
+                                    <li><a href="/client_page/home">Home</a></li>
+                                    <li class="active">Products</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumbs Section End -->
+
+        <!-- Top Products Start -->
+        <div class="rs-products pt-80 md-pt-64">
+            <div class="container">
+                <div class="shop-guide mb-30">
+                    <div class="row rs-vertical-middle">
+                        <div class="col-lg-6 col-md-6 col-sm-6 xs-mb-15">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 text-right xs-text-left">
+                            <div class="sorting">
+                                <form>
+                                    <select>
+                                        <option>Default sorting</option>
+                                        <option>Sort by popularity</option>
+                                        <option>Sort by average rating</option>
+                                        <option>Sort by latest</option>
+                                        <option>Sort by price: low to high</option>
+                                        <option>Sort by price: high to low</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-100 md-pb-80">
+                    <style type="text/css">
+                        h4{
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+			               }
+		            </style>
+                    {% for product in p %}
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="products">
+                            <div class="product-img">
+                                <a href="/client_page/product-detail/{{ product.p_id }}"><img src="/static/assets/images/my_images/{{ product.p_image }}"></a>
+                            </div>
+
+                            <h4 class="product-title"><a href="/client_page/product-detail/{{ product.p_id }}">{{ product.p_name }}</a></h4>
+                            <span class="product-price">
+                                <span class="symbol">₹</span>{{ product.p_price}}
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Subscribe Section Start -->
+                <div class="rs-subscribe bg7">
+                    <form class="subscribe-form" method="POST" action="/client_page/subscribe">
+                        {% csrf_token %}
+                        <div class="row rs-vertical-middle">
+                            <div class="col-lg-6 col-md-12 md-mb-30">
+                                <div class="title-part">
+                                    <h2 class="title white-color"> Subscribe For Update</h2>
+                                    <p class="desc margin-0 white-color"> Subscribe to our newsletter for getting regular updates.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="subscribe-form-fields">
+                                    <input type="submit" class="news-submit" value="Subscribe">
+                                    <input type="email" class="news-email" name="EMAIL" placeholder="EMAIL ADDRESS" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Subscribe Section End -->
+            </div>
+        </div>
+        <!-- Top Products End -->
+
+{% endblock %}
